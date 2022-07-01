@@ -8,19 +8,23 @@ jobs:
   build:
     runs-on: self-hosted
     container:
-      image: ubuntu:latest
+      image: node:18-alpine3.15
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [18.x]
         
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i
-    - run: npm run build --if-present
-    - run: npm test
+       - name: Log the node version
+         run: |
+           node -v
+           cat /etc/os-release  
+#       - uses: actions/checkout@v3
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'npm'
+#       - run: npm i
+#       - run: npm run build --if-present
+#       - run: npm test
